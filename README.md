@@ -1,7 +1,9 @@
 # Moon_Drop
-2D RPG (WIP)
+2D RPG Framework
 
-A top-down 2D RPG in the same vein as Final Fantasy 1-6 or the older Dragon Quest Games
+This is a very simple single player 2D rpg framework to be used as a foundation for any future games.
+
+TODO: Add in maploading (load map in as xml file?)
 
 Code Done in C++ along side the SDL2 API.
 
