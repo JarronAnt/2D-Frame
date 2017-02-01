@@ -1,16 +1,41 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+#include <SDL2/SDL.h>
 
+
+ 
 
 namespace globals
 {
   //screen width and heights constants
-  const int SCREEN_WIDTH   = 640;
-  const int SCREEN_HEIGHT  = 480;
+  const int SCREEN_WIDTH   = 1280;
+  const int SCREEN_HEIGHT  = 720;
 
   //sprite size multiplier
-  const float SPRITE_SCALE = 1.5f;
+  const float SPRITE_SCALE = 1.75f;
+
 }
+
+namespace sides {
+
+  enum Side {
+    TOP,
+    BOTTOM,
+    LEFT,
+    RIGHT,
+    NONE
+  };
+
+  inline Side getOtherSide(Side side) {
+    return
+          side==TOP ? BOTTOM:
+          side==BOTTOM ? TOP:
+          side==LEFT ? RIGHT:
+          side==RIGHT ? LEFT:
+          NONE;
+  }
+}
+
 
 enum direction
 {

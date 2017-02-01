@@ -17,6 +17,7 @@ public:
 	bool wasKeyReleased(SDL_Scancode key);
 	bool isKeyHeld(SDL_Scancode key);
 private:
+	// map sdl code to a bool value 
 	std::map<SDL_Scancode, bool> _heldKeys;
 	std::map<SDL_Scancode, bool> _pressedKeys;
 	std::map<SDL_Scancode, bool> _releasedKeys;

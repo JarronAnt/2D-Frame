@@ -1,0 +1,11 @@
+- Main Menu (mini loop that when broken leads to game or exit)
+- combat system (no clue)
+- items 
+- enemies (similar to player )
+- npcs (similar to player )
+- move between maps (fade to black destory inital map load next map)
+- move to windows and statically link everything cause linux is stupid at times ( need to link sdl2, sdl_image, sdl_ttf)
+- cutscenes
+- crafting 
+- lighting(add black image to camera rect and fade it out using alpha)
+- sfx and music 

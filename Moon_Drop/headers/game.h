@@ -4,6 +4,7 @@
 //inclueds
 #include <player.h>
 #include <Level.h>
+#include <cam.h>
 //forward declare graphics class
 class Graphics;
 
@@ -13,10 +14,13 @@ class Game
 public:
   Game();
   ~Game();
+
+
 private:
   void gameLoop();
   void draw(Graphics &graphics);
   void update(float timeElapsed);
+
 
   Player _player;
   Level _level;

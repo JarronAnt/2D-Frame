@@ -4,7 +4,7 @@
 
 AnimatedSprites::AnimatedSprites(){}
 
-//init list of sprite
+//init list of sprite and init the Sprite parent class
 AnimatedSprites::AnimatedSprites(Graphics &graphics, const std::string &filePath, int sourceX, int sourceY, int width, int height,
 float posX,float posY, float timeToUpdate):
 Sprite(graphics,filePath,sourceX,sourceY,width,height,posX,posY),
@@ -18,13 +18,16 @@ _currentAnimation("")
 //add anim to the map of anims
 void AnimatedSprites::addAnim(int frames, int x ,int y, std::string name, int width , int height, Vector2 offset)
 {
+  //create a rect for each animation
   std::vector<SDL_Rect> rects;
 
+  //loopthorugh the frames of the animation and add to the vector
   for(int i =0 ; i < frames ; i++)
   {
     SDL_Rect newRect = { (i+x)*width,y,width,height };
     rects.push_back(newRect);
   }
+  //add the animation vector to a map 
   this->_animations.insert(std::pair<std::string,std::vector<SDL_Rect> > (name,rects));
   this->_offsets.insert(std::pair<std::string, Vector2> (name, offset));
 
@@ -32,6 +35,7 @@ void AnimatedSprites::addAnim(int frames, int x ,int y, std::string name, int wi
 
 void AnimatedSprites::resetAnim()
 {
+  //clear all anims and offsets
   this->_animations.clear();
   this->_offsets.clear();
 }
@@ -39,7 +43,9 @@ void AnimatedSprites::resetAnim()
 
 void AnimatedSprites::playAnim(std::string animation, bool once)
 {
+  //check if the animation played
   this->_currentAnimationOnce = once;
+  //set the current anim to the one the frame is on
   if(this->_currentAnimation != animation)
   {
     this->_currentAnimation = animation;
@@ -70,6 +76,7 @@ void AnimatedSprites::update(float elapsedTime)
   if(_timeElapsed > _timeToUpdate)
   {
     this->_timeElapsed -= this->_timeToUpdate;
+    //if frame index samller then all frames of the anim increment
     if(this->_frameIndex < this->_animations[this->_currentAnimation].size() -1)
     {
       this->_frameIndex++;
@@ -88,6 +95,7 @@ void AnimatedSprites::update(float elapsedTime)
 //draw the sprite
 void AnimatedSprites::draw(Graphics &graphics, int x, int y)
 {
+  //create an sdl rect of a particular anim frame and draw it 
   if(_visible)
   {
     SDL_Rect destRect;

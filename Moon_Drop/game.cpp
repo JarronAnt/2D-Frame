@@ -5,6 +5,10 @@
 #include <input.h>
 #include <algorithm>
 
+
+//SDL_Rect camera = { 0, 0, globals::SCREEN_WIDTH, globals::SCREEN_HEIGHT };
+
+
 //namespace to hold fps lock stuff
 namespace
 {
@@ -32,9 +36,9 @@ void Game::gameLoop()
   Graphics graphics;
   Input input;
   SDL_Event event;
-
-  this->_player = Player(graphics,100,100);
-  this->_level = Level("map1" , Vector2(100,100), graphics);
+  this->_level = Level("test" , Vector2(100,100), graphics);
+  this->_player = Player(graphics,this->_level.getPlayerSpawnPoint());
+  
   //this->_player.setupAnim();
 //  this->_player.playAnim("WalkLeft");
 
@@ -43,6 +47,7 @@ int LAST_UPDATE_TIME = SDL_GetTicks();
 //start loop
   while(true)
   {
+    //clear inputs
     input.beginNewFrame();
 
     //poll the events
@@ -97,6 +102,7 @@ int LAST_UPDATE_TIME = SDL_GetTicks();
     }
 
       //this is where the actions taken after key presses occur
+      //if escape is pressed  leave the game loop (end game)
       if(input.wasKeyPressed(SDL_SCANCODE_ESCAPE) == true)
       {return;}
 
@@ -136,6 +142,8 @@ int LAST_UPDATE_TIME = SDL_GetTicks();
       LAST_UPDATE_TIME = CURRENT_TIME_MS;
 
       this->draw(graphics);
+
+      
   }
 
 }
@@ -143,9 +151,12 @@ int LAST_UPDATE_TIME = SDL_GetTicks();
 //draw stuff
 void Game::draw(Graphics &graphics)
 {
+  //clear screen
   graphics.clear();
+  //draw the stuff 
   this->_level.draw(graphics);
   this->_player.draw(graphics);
+  //render the stuff 
   graphics.flip();
 }
 
@@ -154,4 +165,15 @@ void Game::update(float timeElapsed)
 {
   this->_level.update(timeElapsed);
   this->_player.update(timeElapsed);
+
+  //keep collision above camera else 
+  //the "vibrating screen" bug occurs 
+  std::vector<Rectangle> others;
+  if((others = this->_level.checkTileCollisions(this->_player.getBoundingBox())).size() > 0) {
+    this->_player.handleTileCollisions(others);
+  }
+ 
+  cam::update(timeElapsed,_player, _level);
+
+
 }
