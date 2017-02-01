@@ -1,16 +1,14 @@
 # Moon_Drop
-2D RPG Framework
+Discontinued 2D game  
 
-NOTE: THIS REPO WILL NO LOGER BE UPDATED AS THIS CODE IS BEING USED IN A COMMERCIAL GAME.
+NOTE: THIS REPO WILL NO LOGER BE UPDATED AS I HAVE PORTED OVER THE GAME TO A GAME ENGINE .
 
-This is a very simple single player 2D rpg framework to be used as a foundation for any future games.
-
-TODO: Add in maploading (load map in as xml file?)
+This is a very simple single player 2D rpg engine deisnged for my first commerical game.
 
 Code Done in C++ along side the SDL2 API.
 
 NOTE: MakeFile was created for out of box use with Linux for windows or anyother OS the makefile must be modified accordingly. 
  
-
+Feel free to take this code a modify it as you see fit. 
 
 
